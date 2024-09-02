@@ -1,0 +1,5 @@
+  name: NexusBackend-Demo-MinecraftPlugin
+  main: com.tesseractsoftwares.nexusbackend.demo.minecraftplugin.NexusBackendPlugin
+  version: 1.0
+  author: Tesseract Softwares
+  api-version: 1.20

@@ -1,5 +1,6 @@
-package com.tesseractsoftwares.nexusbackend.demo.minecraftplugin.commands;
+package com.tesseractsoftwares.nexusbackend.demo.minecraftplugin.commands.auth;
 
+import com.tesseractsoftwares.nexusbackend.demo.minecraftplugin.util.PlayerCheck;
 import com.tesseractsoftwares.nexusbackend.sdkjava.AuthClient;
 import com.tesseractsoftwares.nexusbackend.sdkjava.dtos.NexusAuthenticationRequestDto;
 import org.bukkit.command.Command;
@@ -22,8 +23,7 @@ public class LoginCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
-        if (!(commandSender instanceof Player)) {
-            commandSender.sendMessage("This command only can be used while being a player");
+        if (PlayerCheck.playerCheck(commandSender)) {
             return true;
         }
 
@@ -58,7 +58,5 @@ public class LoginCommand implements CommandExecutor {
                 exception -> commandSender.sendMessage("Error trying to connect to the server"));
 
         return false;
-
-
     }
 }

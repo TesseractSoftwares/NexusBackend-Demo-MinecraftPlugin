@@ -1,12 +1,10 @@
 package com.tesseractsoftwares.nexusbackend.demo.minecraftplugin;
 
-import com.tesseractsoftwares.nexusbackend.demo.minecraftplugin.commands.LoginCommand;
+import com.tesseractsoftwares.nexusbackend.demo.minecraftplugin.commands.auth.LoginCommand;
 import com.tesseractsoftwares.nexusbackend.sdkjava.AuthClient;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.Objects;
 
 public class NexusBackendPlugin extends JavaPlugin {
 

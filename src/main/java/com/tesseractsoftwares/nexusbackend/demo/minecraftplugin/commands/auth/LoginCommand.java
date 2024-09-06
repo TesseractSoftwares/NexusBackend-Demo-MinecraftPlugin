@@ -8,11 +8,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class LoginCommand implements CommandExecutor {
     private final AuthService authService;
     private final NexusBackendPlugin nexusBackendPlugin;
+    private final HashMap<Player, String> authenticatedEmail = new HashMap<>();
 
     public LoginCommand(AuthService authService, NexusBackendPlugin nexusBackendPlugin) {
         this.authService = authService;
@@ -29,32 +31,30 @@ public class LoginCommand implements CommandExecutor {
             return true;
         }
 
-        Player player = (Player) commandSender;
-
         if (args.length != 2) {
             commandSender.sendMessage("Wrong use. You must put /login <email> <password>");
             return true;
         }
 
+        Player player = (Player) commandSender;
         String email = args[0];
         String password = args[1];
 
         if (!EMAIL_PATTERN.matcher(email).matches()) {
-            commandSender.sendMessage("Invalid email, PLIS! write a valid email");
+            player.sendMessage("Invalid email, PLIS! write a valid email");
             return true;
         }
 
         if (password.length() <= 8) {
-            commandSender.sendMessage("The password must have 8 characters");
+            player.sendMessage("The password must have 8 characters");
             return true;
         }
 
         authService.authenticatePlayer(email, password,
                 message -> {
-                    int playerId = getPlayerId(email);
-
-                    nexusBackendPlugin.authenticatePlayer(playerId);
-                    player.sendMessage("Successfully logged: " + message);
+                    nexusBackendPlugin.authenticatePlayer(email);
+                    authenticatedEmail.put(player, email);
+                    player.sendMessage("Successfully logged: " + message + " Welcome " + player.getName() + "!!!");
                 },
                 errorMessage -> player.sendMessage("Invalid Credentials: " + errorMessage),
                 exception -> player.sendMessage("Error trying to connect to the server"));
@@ -62,7 +62,7 @@ public class LoginCommand implements CommandExecutor {
         return false;
     }
 
-    private int getPlayerId(String email) {
-        return 1;
+    public String getEmail(Player player) {
+        return authenticatedEmail.get(player);
     }
 }

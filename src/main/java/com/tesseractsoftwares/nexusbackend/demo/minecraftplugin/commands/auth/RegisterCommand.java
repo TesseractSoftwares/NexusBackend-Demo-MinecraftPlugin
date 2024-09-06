@@ -16,7 +16,9 @@ public class RegisterCommand implements CommandExecutor {
             return true;
         }
 
-        commandSender.sendMessage("If you want to register go to: " + url);
+        Player player = (Player) commandSender;
+
+        player.sendMessage("If you want to register go to: " + url);
 
         return false;
     }

@@ -8,26 +8,24 @@ import com.tesseractsoftwares.nexusbackend.sdkjava.AuthClient;
 import com.tesseractsoftwares.nexusbackend.sdkjava.GraphQLClient;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.checkerframework.checker.units.qual.A;
 
+import java.lang.management.LockInfo;
 import java.util.HashMap;
-import java.util.UUID;
+
 
 public class NexusBackendPlugin extends JavaPlugin {
 
     private AuthClient authClient;
     private GraphQLClient graphQLClient;
 
-
-    private HashMap<Integer, Boolean> authenticatedPlayers;
+    private HashMap<String, Boolean> authenticatedPlayers;
 
     public static String prefix = "&8[&c&lTesseractPlugin&8] ";
     private final String version = getDescription().getVersion();
 
     public void onEnable() {
-        String baseUrl = "http://localhost:5009";
+        String baseUrl = "http://localhost:5286";
         String secretKey = "d9959704ea47a2ff6996fe6723a63198d5c39833e3f12e76f989e4600130c673";
 
         if (secretKey != null){
@@ -56,26 +54,26 @@ public class NexusBackendPlugin extends JavaPlugin {
     private void registerCommands() {
         AuthService authService = new AuthService(authClient);
         PlayerDataService playerDataService = new PlayerDataService(graphQLClient);
-
+        LoginCommand loginCommand = new LoginCommand(authService, this);
 
         if (getCommand("login") != null) {
-            getCommand("login").setExecutor(new LoginCommand(authService, this));
+            getCommand("login").setExecutor(loginCommand);
         } else {
             getLogger().severe("The command login is not defined");
         }
 
         if (getCommand("getplayerinfo") != null) {
-            getCommand("getplayerinfo").setExecutor(new GetPlayerInfoCommand(this, playerDataService));
+            getCommand("getplayerinfo").setExecutor(new GetPlayerInfoCommand(this, playerDataService, loginCommand));
         } else {
             getLogger().severe("The command getplayerinfo is not defined");
         }
     }
 
-    public void authenticatePlayer(int playerId) {
-        authenticatedPlayers.put(playerId, true);
+    public void authenticatePlayer(String email) {
+        authenticatedPlayers.put(email, true);
     }
 
-    public boolean isAuthenticated(int playerId) {
-        return authenticatedPlayers.getOrDefault(playerId, false);
+    public boolean isAuthenticated(String email) {
+        return authenticatedPlayers.getOrDefault(email, false);
     }
 }

@@ -10,8 +10,12 @@ public class PlayerDataService {
         this.graphQLClient = graphQLClient;
     }
 
-    public String getPlayerData(String playerId) {
-        String query = "{ getPlayerInfo(playerId: \"" + playerId + "\") { level coins } }";
-        return graphQLClient.executeGraphQLQuery(query);
+    public String getPlayerData(String email) {
+        String query = " { userInfo(email: \"" + email + "\") { coins email level } }";
+        String response = graphQLClient.executeGraphQLQuery(query);
+
+        System.out.println("GraphQL response: " + response);
+
+        return response;
     }
 }

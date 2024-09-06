@@ -11,3 +11,6 @@ commands:
       - lg
     usage: /login <email> <password>
 
+  getplayerinfo:
+    description: Get the info of player
+    usage: /getplayerinfo

@@ -3,18 +3,18 @@
     <output-path>$USER_HOME$/OneDrive/Escritorio/ServerMinecraft/1.20.1/plugins</output-path>
     <root id="archive" name="NexusBackend-Demo-MinecraftPlugin.jar">
       <element id="module-output" name="NexusBackend-Demo-MinecraftPlugin" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/httpcomponents/core5/httpcore5/5.1.1/httpcore5-5.1.1.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/io/jsonwebtoken/jjwt-jackson/0.12.5/jjwt-jackson-0.12.5.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/commons-codec/commons-codec/1.15/commons-codec-1.15.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.12.7.1/jackson-databind-2.12.7.1.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.12.7/jackson-annotations-2.12.7.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/io/jsonwebtoken/jjwt-impl/0.12.5/jjwt-impl-0.12.5.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/io/jsonwebtoken/jjwt-api/0.12.5/jjwt-api-0.12.5.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.12.7/jackson-core-2.12.7.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.8.0-beta4/slf4j-api-1.8.0-beta4.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/httpcomponents/core5/httpcore5-h2/5.1.1/httpcore5-h2-5.1.1.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/tesseractsoftwares/NexusBackend-SDK-Java/1.0.0/NexusBackend-SDK-Java-1.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/commons-codec/commons-codec/1.15/commons-codec-1.15.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.8.0-beta4/slf4j-api-1.8.0-beta4.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/httpcomponents/client5/httpclient5/5.1/httpclient5-5.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/httpcomponents/core5/httpcore5/5.1.1/httpcore5-5.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/io/jsonwebtoken/jjwt-api/0.12.5/jjwt-api-0.12.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.17.1/jackson-core-2.17.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.17.1/jackson-annotations-2.17.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/io/jsonwebtoken/jjwt-jackson/0.12.5/jjwt-jackson-0.12.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/io/jsonwebtoken/jjwt-impl/0.12.5/jjwt-impl-0.12.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.17.1/jackson-databind-2.17.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/tesseractsoftwares/NexusBackend-SDK-Java/1.0.1/NexusBackend-SDK-Java-1.0.1.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

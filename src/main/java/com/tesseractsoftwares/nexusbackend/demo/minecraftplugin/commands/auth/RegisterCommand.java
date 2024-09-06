@@ -1,19 +1,22 @@
 package com.tesseractsoftwares.nexusbackend.demo.minecraftplugin.commands.auth;
 
-import com.tesseractsoftwares.nexusbackend.demo.minecraftplugin.util.PlayerCheck;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class RegisterCommand implements CommandExecutor {
 
-    private static String url = "URL para registro";
+    private static final String url = "URL para registro";
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
-        if (PlayerCheck.playerCheck(commandSender)) {
+        if(!(commandSender instanceof Player)) {
+            commandSender.sendMessage("This command only can be used while being a player");
             return true;
         }
+
+        commandSender.sendMessage("If you want to register go to: " + url);
 
         return false;
     }

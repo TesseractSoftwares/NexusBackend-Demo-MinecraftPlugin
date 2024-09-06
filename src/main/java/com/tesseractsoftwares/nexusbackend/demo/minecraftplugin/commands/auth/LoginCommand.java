@@ -1,8 +1,7 @@
 package com.tesseractsoftwares.nexusbackend.demo.minecraftplugin.commands.auth;
 
-import com.tesseractsoftwares.nexusbackend.demo.minecraftplugin.util.PlayerCheck;
-import com.tesseractsoftwares.nexusbackend.sdkjava.AuthClient;
-import com.tesseractsoftwares.nexusbackend.sdkjava.dtos.NexusAuthenticationRequestDto;
+import com.tesseractsoftwares.nexusbackend.demo.minecraftplugin.NexusBackendPlugin;
+import com.tesseractsoftwares.nexusbackend.demo.minecraftplugin.services.AuthService;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,10 +11,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.regex.Pattern;
 
 public class LoginCommand implements CommandExecutor {
-    private AuthClient authClient;
+    private final AuthService authService;
+    private final NexusBackendPlugin nexusBackendPlugin;
 
-    public LoginCommand(AuthClient authClient) {
-        this.authClient = authClient;
+    public LoginCommand(AuthService authService, NexusBackendPlugin nexusBackendPlugin) {
+        this.authService = authService;
+        this.nexusBackendPlugin = nexusBackendPlugin;
     }
 
     private static final Pattern EMAIL_PATTERN = Pattern.compile(
@@ -23,7 +24,8 @@ public class LoginCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
-        if (PlayerCheck.playerCheck(commandSender)) {
+        if(!(commandSender instanceof Player)) {
+            commandSender.sendMessage("This command only can be used while being a player");
             return true;
         }
 
@@ -47,16 +49,20 @@ public class LoginCommand implements CommandExecutor {
             return true;
         }
 
-        NexusAuthenticationRequestDto authRequest = new NexusAuthenticationRequestDto();
-        authRequest.setEmail(email);
-        authRequest.setPassword(password);
+        authService.authenticatePlayer(email, password,
+                message -> {
+                    int playerId = getPlayerId(email);
 
-        authClient.authenticate(
-                authRequest,
-                message -> commandSender.sendMessage("Successfully logged: " + message),
-                errorMessage -> commandSender.sendMessage("Invalid Credentials: " + errorMessage),
-                exception -> commandSender.sendMessage("Error trying to connect to the server"));
+                    nexusBackendPlugin.authenticatePlayer(playerId);
+                    player.sendMessage("Successfully logged: " + message);
+                },
+                errorMessage -> player.sendMessage("Invalid Credentials: " + errorMessage),
+                exception -> player.sendMessage("Error trying to connect to the server"));
 
         return false;
+    }
+
+    private int getPlayerId(String email) {
+        return 1;
     }
 }

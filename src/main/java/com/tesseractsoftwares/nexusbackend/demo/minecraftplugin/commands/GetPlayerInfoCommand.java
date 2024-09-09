@@ -36,6 +36,7 @@ public class GetPlayerInfoCommand implements CommandExecutor {
             return true;
         }
 
+        //TODO: do the format of the data
         String playerData = playerDataService.getPlayerData(email);
         player.sendMessage("Your data: " + playerData);
 

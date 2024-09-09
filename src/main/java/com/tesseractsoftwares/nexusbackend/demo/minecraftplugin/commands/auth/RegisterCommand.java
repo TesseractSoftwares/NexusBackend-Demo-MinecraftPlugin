@@ -20,6 +20,6 @@ public class RegisterCommand implements CommandExecutor {
 
         player.sendMessage("If you want to register go to: " + url);
 
-        return false;
+        return true;
     }
 }

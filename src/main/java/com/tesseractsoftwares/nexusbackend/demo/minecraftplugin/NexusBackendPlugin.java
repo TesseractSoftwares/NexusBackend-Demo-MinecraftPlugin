@@ -10,7 +10,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.lang.management.LockInfo;
 import java.util.HashMap;
 
 
@@ -54,7 +53,7 @@ public class NexusBackendPlugin extends JavaPlugin {
     private void registerCommands() {
         AuthService authService = new AuthService(authClient);
         PlayerDataService playerDataService = new PlayerDataService(graphQLClient);
-        LoginCommand loginCommand = new LoginCommand(authService, this);
+        LoginCommand loginCommand = new LoginCommand(this, authService);
 
         if (getCommand("login") != null) {
             getCommand("login").setExecutor(loginCommand);

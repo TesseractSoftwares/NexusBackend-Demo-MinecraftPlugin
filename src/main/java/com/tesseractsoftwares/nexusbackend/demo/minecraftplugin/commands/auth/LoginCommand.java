@@ -16,9 +16,9 @@ public class LoginCommand implements CommandExecutor {
     private final NexusBackendPlugin nexusBackendPlugin;
     private final HashMap<Player, String> authenticatedEmail = new HashMap<>();
 
-    public LoginCommand(AuthService authService, NexusBackendPlugin nexusBackendPlugin) {
-        this.authService = authService;
+    public LoginCommand(NexusBackendPlugin nexusBackendPlugin, AuthService authService) {
         this.nexusBackendPlugin = nexusBackendPlugin;
+        this.authService = authService;
     }
 
     private static final Pattern EMAIL_PATTERN = Pattern.compile(
@@ -59,7 +59,7 @@ public class LoginCommand implements CommandExecutor {
                 errorMessage -> player.sendMessage("Invalid Credentials: " + errorMessage),
                 exception -> player.sendMessage("Error trying to connect to the server"));
 
-        return false;
+        return true;
     }
 
     public String getEmail(Player player) {

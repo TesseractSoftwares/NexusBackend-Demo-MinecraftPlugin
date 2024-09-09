@@ -1,6 +1,6 @@
 name: NexusBackend-Demo-MinecraftPlugin
 main: com.tesseractsoftwares.nexusbackend.demo.minecraftplugin.NexusBackendPlugin
-version: "1.0"
+version: "1.0.3"
 author: Tesseract Softwares
 api-version: "1.20"
 
@@ -13,4 +13,12 @@ commands:
 
   getplayerinfo:
     description: Get the info of player
+    aliases:
+      - gpi
     usage: /getplayerinfo
+
+  register:
+    description: Register command, show you the URL of the main page to register
+    aliases:
+      - rg
+    usage: /register

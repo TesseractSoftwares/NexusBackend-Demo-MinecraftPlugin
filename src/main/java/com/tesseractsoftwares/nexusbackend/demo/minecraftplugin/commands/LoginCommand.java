@@ -1,4 +1,4 @@
-package com.tesseractsoftwares.nexusbackend.demo.minecraftplugin.commands.auth;
+package com.tesseractsoftwares.nexusbackend.demo.minecraftplugin.commands;
 
 import com.tesseractsoftwares.nexusbackend.demo.minecraftplugin.NexusBackendPlugin;
 import com.tesseractsoftwares.nexusbackend.demo.minecraftplugin.services.AuthService;
@@ -25,8 +25,9 @@ public class LoginCommand implements CommandExecutor {
             "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$");
 
     @Override
-    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
-        if(!(commandSender instanceof Player)) {
+    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String alias,
+            @NotNull String[] args) {
+        if (!(commandSender instanceof Player)) {
             commandSender.sendMessage("This command only can be used while being a player");
             return true;
         }

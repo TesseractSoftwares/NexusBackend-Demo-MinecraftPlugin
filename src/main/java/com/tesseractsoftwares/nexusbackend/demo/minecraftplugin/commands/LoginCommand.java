@@ -55,7 +55,7 @@ public class LoginCommand implements CommandExecutor {
                 message -> {
                     nexusBackendPlugin.authenticatePlayer(email);
                     authenticatedEmail.put(player, email);
-                    player.sendMessage("Successfully logged: " + message + " Welcome " + player.getName() + "!!!");
+                    player.sendMessage(message + " Welcome " + player.getName() + "!!!");
                 },
                 errorMessage -> player.sendMessage("Invalid Credentials: " + errorMessage),
                 exception -> player.sendMessage("Error trying to connect to the server"));

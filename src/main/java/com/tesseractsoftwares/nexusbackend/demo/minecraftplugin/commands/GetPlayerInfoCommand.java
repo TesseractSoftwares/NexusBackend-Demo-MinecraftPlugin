@@ -43,7 +43,6 @@ public class GetPlayerInfoCommand implements CommandExecutor {
 
         List<String> requestedFields = Arrays.asList(args);
 
-        // TODO: do the format of the data
         String playerData = playerDataService.getPlayerData(email, requestedFields);
         player.sendMessage(playerData);
 

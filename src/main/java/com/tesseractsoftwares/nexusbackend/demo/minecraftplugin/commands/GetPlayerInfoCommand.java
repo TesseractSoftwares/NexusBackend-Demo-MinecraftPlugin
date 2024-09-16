@@ -13,11 +13,9 @@ import java.util.List;
 public class GetPlayerInfoCommand implements CommandExecutor {
 
     private final PlayerDataService playerDataService;
-    private final LoginCommand loginCommand;
 
-    public GetPlayerInfoCommand(PlayerDataService playerDataService, LoginCommand loginCommand) {
+    public GetPlayerInfoCommand(PlayerDataService playerDataService) {
         this.playerDataService = playerDataService;
-        this.loginCommand = loginCommand;
     }
 
     @Override
@@ -29,21 +27,17 @@ public class GetPlayerInfoCommand implements CommandExecutor {
         }
 
         Player player = (Player) commandSender;
-        String email = loginCommand.getEmail(player);
-
-        if (email == null) {
-            player.sendMessage("You must log in before to use this command");
-            return true;
-        }
 
         if (args.length == 0) {
             player.sendMessage("You must specified which data you want");
             return true;
         }
 
-        List<String> requestedFields = Arrays.asList(args);
+        String targetEmail = args[0];
 
-        String playerData = playerDataService.getPlayerData(email, requestedFields);
+        List<String> requestedFields = Arrays.asList(Arrays.copyOfRange(args, 1, args.length));
+
+        String playerData = playerDataService.getPlayerData(targetEmail, requestedFields);
         player.sendMessage(playerData);
 
         return true;

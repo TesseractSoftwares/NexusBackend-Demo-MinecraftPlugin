@@ -29,7 +29,7 @@ public class GetPlayerInfoCommandTest {
         mockPlayer = mock(Player.class);
         mockCommand = mock(Command.class);
 
-        getPlayerInfoCommand = new GetPlayerInfoCommand(playerDataService, loginCommand);
+        getPlayerInfoCommand = new GetPlayerInfoCommand(playerDataService);
 
         when(mockPlayer.getName()).thenReturn("TestPlayer");
     }

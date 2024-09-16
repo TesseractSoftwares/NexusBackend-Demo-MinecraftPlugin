@@ -5,6 +5,7 @@ import com.tesseractsoftwares.nexusbackend.demo.minecraftplugin.commands.LoginCo
 import com.tesseractsoftwares.nexusbackend.demo.minecraftplugin.commands.RegisterCommand;
 import com.tesseractsoftwares.nexusbackend.demo.minecraftplugin.services.AuthService;
 import com.tesseractsoftwares.nexusbackend.demo.minecraftplugin.services.PlayerDataService;
+import com.tesseractsoftwares.nexusbackend.demo.minecraftplugin.util.ConfigLoader;
 import com.tesseractsoftwares.nexusbackend.sdkjava.AuthClient;
 import com.tesseractsoftwares.nexusbackend.sdkjava.GraphQLClient;
 import org.bukkit.Bukkit;
@@ -24,8 +25,10 @@ public class NexusBackendPlugin extends JavaPlugin {
     private final String version = getDescription().getVersion();
 
     public void onEnable() {
+        ConfigLoader configLoader = new ConfigLoader();
+
         String baseUrl = "http://localhost:5286";
-        String secretKey = "d9959704ea47a2ff6996fe6723a63198d5c39833e3f12e76f989e4600130c673";
+        String secretKey = configLoader.getSecretKey();
 
         if (secretKey != null) {
             this.authClient = new AuthClient(baseUrl, secretKey);
@@ -62,7 +65,7 @@ public class NexusBackendPlugin extends JavaPlugin {
         }
 
         if (getCommand("getplayerinfo") != null) {
-            getCommand("getplayerinfo").setExecutor(new GetPlayerInfoCommand(playerDataService, loginCommand));
+            getCommand("getplayerinfo").setExecutor(new GetPlayerInfoCommand(playerDataService));
         } else {
             getLogger().severe("The command getplayerinfo is not defined");
         }

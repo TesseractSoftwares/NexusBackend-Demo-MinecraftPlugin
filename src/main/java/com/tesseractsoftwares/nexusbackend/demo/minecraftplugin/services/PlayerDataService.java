@@ -27,27 +27,37 @@ public class PlayerDataService {
         return query;
     }
 
-    private String formatResponse(String response, List<String> fields) {
-        StringBuilder sb = new StringBuilder("Your data: ");
+    private String formatResponse(String email, String response, List<String> fields) {
+        StringBuilder sb = new StringBuilder();
         try {
             JsonNode jsonResponse = objectMapper.readTree(response);
             JsonNode userInfo = jsonResponse.path("data").path("userInfo");
 
+            if (userInfo.isMissingNode() || userInfo.isNull()) {
+                return "Error: No data found for the email: " + email;
+            }
+
+            sb.append("The data of ").append(email).append(": ");
+
             for (String field : fields) {
                 JsonNode fieldValue = userInfo.path(field);
-                sb.append(field).append(": ").append(fieldValue.asText()).append(", ");
+                if (fieldValue.isMissingNode() || fieldValue.isNull()) {
+                    sb.append(field).append(": ").append("N/A").append(", ");
+                } else {
+                    sb.append(field).append(": ").append(fieldValue.asText()).append(", ");
+                }
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        return sb.toString().trim();
+        return sb.toString().trim().replaceAll(", $", "");
     }
 
     public String getPlayerData(String email, List<String> fields) {
         String query = buildQuery(email, fields);
         String response = graphQLClient.executeGraphQLQuery(query);
 
-        return formatResponse(response, fields);
+        return formatResponse(email, response, fields);
     }
 }

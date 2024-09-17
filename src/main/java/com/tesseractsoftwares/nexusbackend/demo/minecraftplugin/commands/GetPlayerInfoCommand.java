@@ -28,14 +28,14 @@ public class GetPlayerInfoCommand implements CommandExecutor {
 
         Player player = (Player) commandSender;
 
-        if (args.length == 0) {
+        if (args.length < 2) {
             player.sendMessage("You must specified which data you want");
             return true;
         }
 
         String targetEmail = args[0];
 
-        List<String> requestedFields = Arrays.asList(Arrays.copyOfRange(args, 1, args.length));
+        List<String> requestedFields = Arrays.asList(Arrays.copyOfRange(args,1,args.length));
 
         String playerData = playerDataService.getPlayerData(targetEmail, requestedFields);
         player.sendMessage(playerData);
